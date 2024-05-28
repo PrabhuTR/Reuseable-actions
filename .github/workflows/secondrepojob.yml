@@ -1,0 +1,35 @@
+name: secondrepojob
+
+on: push
+
+jobs:
+   job1:
+     runs-on: ubuntu-latest
+     steps:
+       - name: FTP upload
+       - run: readme
+       - name: delete the old version of the same 
+       - run: readme
+   job2:
+   needs: job1
+   runs-on: windows-latest
+    steps:
+      - name: stop the app
+      - run: readme
+      - name: kill the PID 
+      - run: readme
+ job3:
+   needs: job2
+   runs-on: windows-latest
+    steps:
+      - name: stop the app
+      - run: readme
+      - name: kill the PID 
+      - run: readme
+   
+  job4:
+   needs: job3
+   runs-on: windows-latest
+    steps:
+      -run: date
+      
