@@ -7,29 +7,25 @@ jobs:
      runs-on: ubuntu-latest
      steps:
        - name: FTP upload
-       - run: readme
+       - run: date
        - name: delete the old version of the same 
-       - run: readme
+       - run: date
+  
    job2:
-   needs: job1
-   runs-on: windows-latest
-    steps:
+     needs: job1
+     runs-on: windows-latest
+     steps:
       - name: stop the app
-      - run: readme
+      - run: date
       - name: kill the PID 
       - run: readme
- job3:
-   needs: job2
-   runs-on: windows-latest
-    steps:
-      - name: stop the app
-      - run: readme
-      - name: kill the PID 
-      - run: readme
-   
-  job4:
-   needs: job3
-   runs-on: windows-latest
-    steps:
-      -run: date
+      
+   job3:
+     needs: job2
+     runs-on: windows-latest
+     steps:
+      - name: start the app
+      - run: date
+      - name: send mail
+      - run: date
       
