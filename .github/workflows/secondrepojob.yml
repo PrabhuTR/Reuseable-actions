@@ -3,29 +3,24 @@ name: secondrepojob
 on: push
 
 jobs:
-   job1:
+   FTPuploade:
      runs-on: ubuntu-latest
      steps:
        - name: FTP upload
        - run: date
-       - name: delete the old version of the same 
-       - run: date
-  
-   job2:
-     needs: job1
+
+   Removeoldversion:
+     needs: FTPuploade
      runs-on: windows-latest
      steps:
-      - name: stop the app
+      - name: stop the app and delete the old version
       - run: date
-      - name: kill the PID 
-      - run: readme
       
-   job3:
-     needs: job2
+   killPID:
+     needs: Removeoldversion
      runs-on: windows-latest
      steps:
       - name: start the app
       - run: date
-      - name: send mail
-      - run: date
+
       
