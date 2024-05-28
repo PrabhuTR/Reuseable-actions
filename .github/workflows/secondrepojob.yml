@@ -6,21 +6,18 @@ jobs:
    FTPuploade:
      runs-on: ubuntu-latest
      steps:
-       - name: FTP upload
        - run: date
 
    Removeoldversion:
      needs: FTPuploade
      runs-on: windows-latest
      steps:
-      - name: stop the app and delete the old version
       - run: date
       
    killPID:
      needs: Removeoldversion
      runs-on: windows-latest
      steps:
-      - name: start the app
       - run: date
 
       
