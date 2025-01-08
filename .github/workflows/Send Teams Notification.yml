@@ -1,0 +1,45 @@
+name: Send Teams Notification
+
+on:
+  workflow_call:
+    inputs:
+      version_number:
+        description: 'The version number of the build or deployment'
+        required: true
+        type: string
+      branch:
+        description: 'The branch name if applicable'
+        required: false
+        type: string
+
+jobs:
+  send_notification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Teams Notification
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL2 }}
+          JOB_STATUS: ${{ job.status }}
+          TRIGGERED_BY: ${{ github.actor }}
+        run: |
+          $branchText = if ([string]::IsNullOrEmpty("${{ inputs.branch }}")) { "No branch specified" } else { "${{ inputs.branch }}" }
+          $payload = @{
+            title = "Build Status Notification"
+            text = @"
+            Hi Team,
+            
+            The build has $env:JOB_STATUS with the following details:
+          - Version Number: ${{ inputs.version_number }}
+          - Branch: $branchText
+          - Triggered by: $env:TRIGGERED_BY
+          
+          Thanks,
+          SCM-BLR
+          "@
+          }
+          try {
+            Invoke-RestMethod -Uri $env:WEBHOOK_URL -Method Post -ContentType 'application/json' -Body ($payload | ConvertTo-Json) -ErrorAction Stop
+          } catch {
+            Write-Error "Failed to send Teams notification: $_"
+          }
+        shell: pwsh
