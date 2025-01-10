@@ -30,7 +30,7 @@ jobs:
             
             The build has $env:JOB_STATUS with the following details:
           - Version Number: ${{ inputs.version_number }}
-          - Branch: $branchText
+          - Branch: ${{ inputs.branch }}
           - Triggered by: $env:TRIGGERED_BY
           
           Thanks,
