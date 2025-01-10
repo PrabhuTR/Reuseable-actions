@@ -22,7 +22,7 @@ jobs:
           JOB_STATUS: ${{ job.status }}
           TRIGGERED_BY: ${{ github.actor }}
         run: |
-          $branchText = if ([string]::IsNullOrEmpty("${{ inputs.branch }}")) { "No branch specified" } else { "${{ inputs.branch }}" }
+          
           $payload = @{
             title = "Build Status Notification"
             text = @"
