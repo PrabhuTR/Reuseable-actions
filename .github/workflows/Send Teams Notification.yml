@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Send Teams Notification
         env:
-          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL2 }}
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK }}
           JOB_STATUS: ${{ job.status }}
           TRIGGERED_BY: ${{ github.actor }}
         run: |
